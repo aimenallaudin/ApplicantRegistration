@@ -1,2 +1,2 @@
 # ApplicantRegistration
-Applicant registration first assignment
+Applicant registration first web assignment
