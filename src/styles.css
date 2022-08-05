@@ -8,4 +8,17 @@ body{
     border:2px solid red;
 }
 html, body { height: 100%; }
-body { margin: 5px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 5px; font-family: Roboto, "Helvetica Neue", sans-serif; 
+background-color: rgb(224, 221, 255);}
+mat-dialog-container {
+    background-color: rgb(2, 4, 40) !important;
+    padding: 0px 0px 0px 0px !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    border: solid 4px whitesmoke !important;
+  }
+  .blue-snackbar {
+    background:  rgb(2, 4, 40) ;
+    color: whitesmoke;
+    
+  }

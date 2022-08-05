@@ -1,4 +1,21 @@
 .delete-icon{
     font-size:20px;
     color:red;
+    margin: 2px 20px;
+}
+.tableAdd{
+    width:100%;
+}
+.border{
+    background-color:  rgb(2, 4, 40);
+    color: whitesmoke;
+    
+}
+.update-icon{
+    margin: 2px 5px;
+    font-size:20px;
+    color:rgb(2, 4, 40);
+}
+.thead-light{
+    background-color: rgb(2, 4, 40);
 }

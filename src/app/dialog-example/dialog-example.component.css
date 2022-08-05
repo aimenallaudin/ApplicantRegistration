@@ -1,0 +1,85 @@
+/* dialogConfig.position = {
+    'top': '0',
+    left: '0'
+}; */
+.dialogbox {
+    top: 10%;
+    left: 0;
+    text-align: center;
+    align-items: center;
+    /* background-color: rgb(144, 228, 224); */
+    color: whitesmoke;
+    font-size: medium;
+    margin: 30px;
+}
+
+.cdk-overlay-pane.my-dialog {
+    position: relative !important;
+}
+
+.btn-close {
+    width: 9px;
+    /* background-color: whitesmoke; */
+    top: 0%;
+    /* margin: 0px, 1000px; */
+    align-items: right !important;
+    left: 92%;
+}
+
+.closeB {
+    top: 0%;
+    align-items: right;
+    /* background-color: whitesmoke; */
+
+
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+
+    /* color: whitesmoke; */
+}
+
+.closebutton {
+    background-color: whitesmoke;
+}
+
+/* mat-dialog-container {
+    background-color: transparent !important;
+    padding: 0px 0px 0px 0px !important;
+    overflow: hidden !important;
+    border-radius: 500px !important;
+} */
+
+.vertical-center {
+    margin: 50px 142px;
+    position: absolute;
+    top: 52%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    /* background-color: rgb(144, 228, 224); */
+
+}
+
+.buttoncancel {
+    height: 40px;
+    width: 100px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    margin: 20px 15px;
+}
+
+.buttonsubmit {
+    height: 40px;
+    width: 100px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin: 20px 20px;
+    color: rgb(0, 0, 0);
+}

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDialogActions, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
+// import { MatDialogActions, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button'
 import {MatButtonHarness} from '@angular/material/button/testing';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +18,8 @@ import { ApplicantDetailComponent } from './applicant-detail/applicant-detail.co
 import { RowTableComponent } from './row-table/row-table.component';
 import { ApplicantComponentComponent } from './applicant-component/applicant-component.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     
@@ -28,15 +29,17 @@ import { ApplicantComponentComponent } from './applicant-component/applicant-com
     DialogExampleComponent,
     ApplicantDetailFormComponent,
     RowTableComponent
+  
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatDialogActions,
-    MatDialogTitle,
-    MatDialogContent
+    // MatDialogActions,
+    // MatDialogTitle,
+    // MatDialogContent, 
+    MatSnackBarModule
     
 
   ],
@@ -50,7 +53,8 @@ import { ApplicantComponentComponent } from './applicant-component/applicant-com
     MatDialogModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule
     // NgbModule
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}],

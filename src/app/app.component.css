@@ -1,19 +1,65 @@
 body {
     margin: 20px 60px;
     padding: 5%;
+    background-color: rgb(175, 226, 226);
 
 }
 
 .content {
-  max-width: 700px;
+  width: 80%;
   margin: auto;
+  /* height: 35%; */
+  bottom: 0%;
 }
+input.ng-invalid.ng-touched {
+  border: red 1px solid;
+}
+.is-invalid{
+  border: red 1px solid;
+}
+.alert-border{
+  height: 7px;
+  align-items: center;
+font-size: smaller;
+padding: auto;
+text-align:justify;
+
+    margin-bottom: -1rem;
+
+}
+.alert {
+  display:inline-block;
+  width:100%;    
+  height: 18%;
+  font-size: small;
+  font-style: oblique;
+  line-height: normal;
+}
+.input-border{
+  border: rgb(206, 197, 255) 1px solid;
+  display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    /* border: 1px solid #ced4da; */
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
 .thirty {
   width: 40%;
   display: block;
   float: left;
   right: 0;
-  background-color:rgb(240, 242, 248);
+  /* background-color:rgb(240, 242, 248); */
+  background-color: rgb(2, 4, 40);
   top: 0;
   height: 100%;
   position: absolute;
@@ -28,7 +74,7 @@ body {
   background-color: rgb(188, 195, 219);
   height: 110%;
   right:30%;
-  margin: -20px 10px;
+  margin: -40px 4px;
   position:initial;
  
   /* position: fixed; */
@@ -38,11 +84,7 @@ body {
   z-index: 9999;
 }
 .cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } 
-.buttonrowsubmit{
-  background-color: rgb(188, 195, 219);
- position: absolute;
-  
-}
+
 .dropdown{
   margin: -20px 10px;
   position:initial;
@@ -89,13 +131,16 @@ section {
     transition: opacity 0.6s; /* 600ms to fade out */
   }
   .dropdown-height{
-    height: 31px !important;
+    height: 33px !important;
+    border-radius: 0.375rem;
+    width: 285px;
+    cursor: pointer;
   }
 .tableshow{
     cursor: pointer;
     padding: 0px;
     position: absolute;
-    width: 100%;
+    width: 99%;
     border-radius: 30px;
     padding: 10px 10px;
     
@@ -115,18 +160,18 @@ section {
 
 .continerform{
 padding: 20px;
-width: 98%;
+width: 97%;
 height: 80%;
 align-items: center;
-margin: 40px 35px;
-border-radius: 5px;
+margin: 35px 15px;
+border-radius: 0px;
  position:absolute;
- 
+
 }
  
 .registerbtn {
-  background-color: #065494;
-  color: white;
+  background-color: #a0dcff;
+  color: rgb(0, 0, 0);
   padding: 16px 20px;
   margin: 8px 0;
   border: none;
@@ -137,16 +182,38 @@ border-radius: 5px;
   
 }
 
-/* .container {
-  background-color: rgb(241, 244, 245);
-    border: 8px solid #000000;
-    padding: 50px;
-    margin: 20px 60px;
-   
+button {
+  padding: 5px 10px;
+  
+}
 
-    align-items: center;
+.buttonreset{
+  height: 45px;
+  width: 150px;
+  background-color: #f27088;
+  border-radius: 25px;
+  color: white;
+}
+.alertheight{
+  height: 14px;
+}
+.buttonsubmit{
+  height: 45px;
+  width: 150px;
+  background-color: #57cbeb;
+  border-radius: 25px;
+  color: rgb(255, 255, 255);
+}
+button:hover {
+  padding: 5px 10px;
+}
 
-} */
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
 
 #toggle {
     position: absolute;
@@ -205,10 +272,11 @@ border-radius: 5px;
 /* Control the left side */
 .left {
   left: 0;
-  background-color: rgb(188, 195, 219);
+  color: whitesmoke;
+  background-color: rgb(2, 4, 40);
+
 }
 
-/* Control the right side */
 .right {
   right: 0;
   background-color:rgb(240, 242, 248);

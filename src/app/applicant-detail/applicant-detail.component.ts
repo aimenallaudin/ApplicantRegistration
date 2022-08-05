@@ -1,11 +1,12 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { Country } from '../country';
+import { DialogExampleComponent } from '../dialog-example/dialog-example.component';
 import { Applicant } from '../shared/applicant.model';
 import { ApplicantService } from '../shared/applicant.service';
-
 @Component({
   selector: 'app-applicant-detail',
   templateUrl: './applicant-detail.component.html',
@@ -43,35 +44,48 @@ export class ApplicantDetailComponent implements OnInit {
   get f() {
     return this.ApplicantDetailForm.controls;
   }
-  deleteApplicant(id: Number) {
 
-    
-    if (confirm('Are you sure you want to delete this record?')) {
-      
+
+openDialog(id:Number){
+const dialogConfig=new MatDialogConfig();
+dialogConfig.disableClose=true;
+dialogConfig.autoFocus=true;
+this.dialog.open(DialogExampleComponent, dialogConfig);
+const dialogRef=this.dialog.open(DialogExampleComponent, dialogConfig);
+dialogRef.afterClosed().subscribe(data=>console.log("Dialog works"));
+}
+onDelete(event: MouseEvent, id:Number){
+  let dialogRef = this.dialog.open(DialogExampleComponent,{
+    width:'600px',
+    height:'220px',
+    panelClass: 'my-dialog',
+    data:'delete'
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result == 'false') {
       this.service.deleteApplicant(id).subscribe(data => {
-        console.log("record is deleted", id);
         this.service.getApplicant().subscribe(data => {
           this.service.listApplicant = data;
+          this.refreshData();
         });
       }, err => {
-        console.log('record is not deleted');
+       
       }
       );
-    }
-
   }
+});
+}
   refreshData() {
     
-    console.log("Refresh data opened sould only open before save");
+    
     this.service.getApplicant().subscribe(res => {
       this.service.listApplicant = res;
-      console.log("ListApplicant is updated!!", this.service.listApplicant.values);
+      
     });
 
   }
   populateApplicant(selectedApplicant: Applicant) {
     
-    console.log(selectedApplicant);
     this.service.formData = selectedApplicant;
   }
   

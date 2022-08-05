@@ -12,13 +12,14 @@ import { HttpClient } from '@angular/common/http';
 import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 import { Applicant } from './shared/applicant.model';
 import { TitleStrategy } from '@angular/router';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'ApplicantFF';
   listCountry?: any;
@@ -28,12 +29,12 @@ export class AppComponent implements OnInit {
   alert: boolean = false;
   isReset: boolean = false;
   listData: any;
+  zero: Number = 0;
   show: boolean = false;
   countryNames: string[] = [];
   isSubmit?: boolean = true;
   buttonName: any = 'Show Applicants';
-  buttonSubmit:any='Submit';
- 
+  buttonSubmit: any = 'Submit';
 
   public ApplicantForm = new FormGroup({
 
@@ -43,78 +44,42 @@ export class AppComponent implements OnInit {
     countryOfOrigin: new FormControl("", Validators.required),
     emailAddress: new FormControl('', [Validators.required, Validators.email]),
     age: new FormControl("", Validators.required),
-    hired: new FormControl('', Validators.required)
-    
+    hired: new FormControl(0, Validators.required)
+
   }, { updateOn: 'blur' });
 
-
-  constructor(private CountryService: CountryService, public dialog: MatDialog, public service: ApplicantService, private readonly httpClient: HttpClient) {
+  constructor(private CountryService: CountryService, public dialog: MatDialog, public service: ApplicantService, private readonly httpClient: HttpClient, private _snackBar: MatSnackBar) {
     this.isSubmit = false;
     this.isReset = false;
   }
 
   ngOnInit() {
-  this.fetchCountry();
+    this.fetchCountry();
     this.service.getApplicant().subscribe(data => {
       this.service.listApplicant = data;
-      console.log("ngOnInit called");
     });
 
   }
-  onChange(event:any){
-    console.log(event.value);
+  onChange(event: any) {
   }
+  // enum UserResponse {
+  //   No = 0,
+  //   Yes = 1,
+  // }
+
 
   public fetchCountry(): void {
-    console.log("fetch country opened()");
     let totalcountries: any; let i: 0;
     this.CountryService.getCountry().subscribe(data => {
       this.listCountry = data;
-
     },
-      error => { console.log('Log the country error here:', error); }
+      error => { }
     );
 
 
   }
-  // public fetchCountry(): void {
-  //   let i: 0;
-  //   this.CountryService.getCountry().subscribe(data => {
-  //     //data.listCountry.find(name.["common"])
-  //     // data.listCountry.find(name.["common"])
-  //     // this.listCountry = data;
-
-  //     //  for(i=0;i<data.length; i++){
-  //     //   this.listofall=this.listCountry[i]['find'](name);
-  //     //  }
-
-  //     //console.log('1st index',this.namesofcountries[0].name);
-  //     console.log('COuntries fetched:::', this.listCountry);
-
-  //     // x=>x.listCountry.find(name.["common"]);
-  //     // const selectedcountry=this.listCountry.find(x=>x.listCountry.name);
-  //     //console.log("Logginf in the fetched country pt1 ",selectedcountry );
-
-
-  //    // console.log('logging in the fetched countries:::::', this.listofall);
-
-
-
-  //   }
-  //   );
-  //   // error=>{ console.log('Log in the country error : ', error)},
-
-
-
-
-
-  //   //x=this.listCountry?.find('Pakistan');
-
-
-  // }
 
   public submitForm() {
-    console.log("Entering submit form");
     if (this.service.formData.id == 0) {
       if (this.ApplicantForm.valid) {
 
@@ -122,36 +87,26 @@ export class AppComponent implements OnInit {
           this.isReset = true;
           this.resetApplicantProfile();
           this.refreshData();
+
         },
-          err => { console.log("Data not correct to submit form: ", err); }
+          err => { }
         );
       }
     }
-      else{
-        
-        this.updateApplicants(this.service.formData.id);
-
-      }
-    
+    else {
+      this.updateApplicants(this.service.formData.id);
+    }
   }
-
-
-
   refreshData() {
     this.service.getApplicant().subscribe(res => {
       this.service.listApplicant = res;
-      console.log("ListApplicant is updated!!", this.service.listApplicant.values);
     });
-
+    this.ApplicantForm.controls['hired'].setValue(0);
   }
   public resetApplicantProfile(): void {
-
-    console.log("Reset applicant opened");
     this.alert = false;
     this.ApplicantForm.reset();
-
-
-
+    this.ApplicantForm.controls['hired'].setValue(0);
   }
   updateApplicants(id: Number) {
     this.service.updateApplicant(id).subscribe(d => {
@@ -161,24 +116,7 @@ export class AppComponent implements OnInit {
   }
 
   populateApplicant(selectedApplicant: Applicant) {
-    console.log(selectedApplicant);
-    
     this.service.formData = selectedApplicant;
-  }
-  deleteApplicant(appid: Number) {
-
-    if (confirm('Are you sure you want to delete this record?')) {
-      this.service.deleteApplicant(appid).subscribe(data => {
-        console.log("record is deleted");
-        this.service.getApplicant().subscribe(data => {
-          this.service.listApplicant = data;
-        });
-      }, err => {
-        console.log('record is not deleted');
-      }
-      );
-    }
-
   }
   get f() {
     return this.ApplicantForm.controls;
@@ -187,23 +125,26 @@ export class AppComponent implements OnInit {
     this.alert = false;
   }
   openAlert(event: MouseEvent) {
-    console.log("openAlert has opened::::::::ready to submit");
+    this._snackBar.open("Registered Successfully!", "X", {
+      duration: 4000,
+      panelClass: ['blue-snackbar']
+    });
     this.alert = !this.alert;
     this.isSubmit = true;
     this.submitForm();
 
   }
-  get toggleSubmit(){
-    if(this.service.formData.id==0){
-      this.isSubmit=true;
-      this.buttonSubmit="Submit";
+  get toggleSubmit() {
+    if (this.service.formData.id == 0) {
+      this.isSubmit = true;
+      this.buttonSubmit = "Submit";
     }
-    else{
-      this.isSubmit=false;
-      this.buttonSubmit="Update";
+    else {
+      this.isSubmit = false;
+      this.buttonSubmit = "Update";
     }
     return this.isSubmit;
-    
+
   }
   toggle(event: MouseEvent) {
 
@@ -213,23 +154,25 @@ export class AppComponent implements OnInit {
 
     }
     else
-      this.buttonName = "Show Applicants"
+      this.buttonName = "Show Applicants";
 
 
   }
+  onReset(event: MouseEvent) {
+    let dialogRef = this.dialog.open(DialogExampleComponent, {
+      width: '600px',
+      height: '220px',
+      data: 'reset'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'false') {
+        // if (confirm('Are you sure you want to reset this Page?')) {
+        this.isReset = true;
 
-  openDialog(event: MouseEvent): void {
-
-    //debugger;
-    console.log("openDialog opened");
-    //let dialogRef = this.dialog.open(DialogExampleComponent);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('Dialog result:', result);
-    //   if (result == 'false') {
-    if (confirm('Are you sure you want to reset this Page?')) {
-      this.isReset = true;
-      this.resetApplicantProfile();
-    }
+        this.resetApplicantProfile();
+      }
+    });
   }
+
 }
 
